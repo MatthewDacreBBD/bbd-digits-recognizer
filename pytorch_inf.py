@@ -10,24 +10,24 @@ class NeuralNetwork(nn.Module):
         self.flatten = nn.Flatten()
 
         self.conv_stack_1 = nn.Sequential(
-            nn.Conv2d(1, 6, kernel_size=5, stride=1, padding=0),
-            nn.BatchNorm2d(6),
+            nn.Conv2d(1, 32, kernel_size=5, stride=1, padding=0),
+            nn.BatchNorm2d(32),
             nn.ReLU(),
-            nn.MaxPool2d(kernel_size = 2, stride = 2)
+            nn.MaxPool2d(kernel_size = 3, stride = 2)
         )
 
         self.conv_stack_2 = nn.Sequential(
-            nn.Conv2d(6, 16, kernel_size=5, stride=1, padding=0),
-            nn.BatchNorm2d(16),
+            nn.Conv2d(32, 64, kernel_size=5, stride=1, padding=0),
+            nn.BatchNorm2d(64),
             nn.ReLU(),
-            nn.MaxPool2d(kernel_size = 2, stride = 2)
+            nn.MaxPool2d(kernel_size = 3, stride = 2)
         )
         self.linear_stack = nn.Sequential(
-            nn.Linear(256, 120),
+            nn.Linear(576, 240),
             nn.ReLU(),
-            nn.Linear(120, 84),
+            nn.Linear(240, 100),
             nn.ReLU(),
-            nn.Linear(84, 10),
+            nn.Linear(100, 10),
         )
 
     def forward(self, x):
@@ -38,8 +38,8 @@ class NeuralNetwork(nn.Module):
         return x
     
 
-PATH = "model_250_single.pt"
-OUT = 'submission_model_250_single.csv'
+PATH = "model_250_single_large.pt"
+OUT = 'submission_model_250_single_large.csv'
 device = "cpu"
 
 
